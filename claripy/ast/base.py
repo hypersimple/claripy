@@ -679,15 +679,15 @@ class Base(ana.Storable):
                 if type(arg_a) != type(arg_b):
                     return False
                 # They are not ASTs
-                if arg_a != arg_b:
-                    return False
+                #if arg_a != arg_b:
+                    #return False
                 else:
                     continue
 
-            if arg_a.op in ('I', 'BVS', 'FP'):
+            #if arg_a.op in ('I', 'BVS', 'FP'):
                 # This is a leaf node in AST tree
-                if arg_a is not arg_b:
-                    return False
+                #if arg_a is not arg_b:
+                    #return False
 
             else:
                 if not arg_a.structurally_match(arg_b):
