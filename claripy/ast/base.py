@@ -695,6 +695,39 @@ class Base(ana.Storable):
 
         return True
 
+    
+    #newnew
+    def structurally_compare(self, o):
+
+        if self.op != o.op:
+            return False
+
+        if len(self.args) != len(o.args):
+            return False
+
+        for arg_a, arg_b in zip(self.args, o.args):
+            if not isinstance(arg_a, Base):
+
+                if (arg_a == 0 and arg_b != 0) or (arg_a != 0 and arg_b == 0):
+                    return False
+
+                if type(arg_a) != type(arg_b):
+
+                    if (type(arg_a) == int and type(arg_b) == long) or (type(arg_a)==long and type(arg_b)==int):
+                        return True
+
+                    return False
+
+                else:
+                    continue
+
+            else:
+                if not arg_a.structurally_match(arg_b):
+                    return False
+
+        return True
+    
+    
     def replace(self, old, new):
         """
         Returns an AST with all instances of the AST 'old' replaced with AST 'new'.
